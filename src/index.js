@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(priorityVar.value) 
       deleteButton.addEventListener('click', function(e){
           taskLi.remove();
+          //e.target.parentNode.remove()
       })
     }
     
