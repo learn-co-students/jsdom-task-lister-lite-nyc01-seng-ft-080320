@@ -1,13 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // your code here
 
-    
+    // Sort button for task list
     const sortButton = document.createElement('button');
     sortButton.innerText = "Sort";
     sortButton.classList.add("sort");
 
     const listBox = document.querySelector("#list");
-    // listBox.appendChild(sortButton);
     listBox.insertAdjacentElement('afterend', sortButton)
 
     sortButton.addEventListener('click', function(){
@@ -22,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       })
 
-    //targetElement.insertAdjacentElement(position, element);
+    //drop down menu in form
 
     const dropDown= `<label for="priority"> Priority:</label>
         <select id="priority" name="priority" size="1">
@@ -36,12 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const priority =document.createElement('div');
     priority.innerHTML = dropDown;
     form.append(priority);
+    // form.insertBefore(priority, submit);
 
+    //EventHandler for submit button
     submit.addEventListener('click',function(e){
         e.preventDefault();
         const taskLi = document.createElement("li");
-        const parentUl = document.querySelector("#tasks");
+
         const inputValue = document.querySelector("#new-task-description");
+        taskLi.textContent = inputValue.value;
+
+        const priorityText = document.querySelector("#priority").value
+        taskLi.style.color = priorityColor(priorityText)
+        taskLi.classList.add(priorityText)
+
         const deleteButton = document.createElement("button")
         deleteButton.innerText = "X"
         deleteButton.classList.add("deleteButton")
@@ -50,16 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
             e2.preventDefault();
             deleteButton.parentNode.remove();
         })
-      
-        taskLi.textContent = inputValue.value;
-        const priorityText = document.querySelector("#priority").value
-        taskLi.style.color = priorityColor(priorityText)
-        taskLi.classList.add(priorityText)
-    
         taskLi.appendChild(deleteButton)
-        parentUl.appendChild(taskLi);
-        
 
+        const parentUl = document.querySelector("#tasks");
+        parentUl.appendChild(taskLi);
+
+        document.querySelector("#create-task-form").reset();
     });
 
     function priorityColor(priorityValue){
@@ -79,16 +81,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
-
-
-
-/*
-$('#sort').on('click', function() {
-  var sortedElements = $('.greendivs, .orangedivs, .reddivs').sort(function(a, b) {
-    debugger
-    return a.className > b.className;
-  });
-
-  $('.container_for_alldivs').html(sortedElements);
-});
-*/
