@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //targetElement.insertAdjacentElement(position, element);
 
     const dropDown= `<label for="priority"> Priority:</label>
-        <select id="cars" name="cars" size="1">
+        <select id="priority" name="priority" size="1">
         <option value= "1" >High</option>
         <option value= "2" >Medium</option>
         <option value= "3" >Low</option>
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
       
         taskLi.textContent = inputValue.value;
-        const priorityText = document.querySelector("#cars").value
+        const priorityText = document.querySelector("#priority").value
         taskLi.style.color = priorityColor(priorityText)
         taskLi.classList.add(priorityText)
     
