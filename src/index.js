@@ -53,11 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
     taskList.append(taskItem);
 
     // add edit button for that new task
+
     const editButton = document.createElement('button');
     editButton.textContent = 'edit Task';
     taskItem.append(editButton);
 
-    // change task to edit field when delete button is clicked
     editButton.addEventListener('click', function(e) {
       taskItem.innerHTML = `
         <form id="edit-task-form" action="#" method="post">
