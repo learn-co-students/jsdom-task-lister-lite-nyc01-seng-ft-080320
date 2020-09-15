@@ -12,27 +12,25 @@ function assignPriority(priorityField, taskItem){
   }
 }
 
-function createPriorityDropdown(priorityDropdown){
+function createPriorityDropdown(){
+  const dropdown = document.createElement('select');
+  dropdown.className = "priority-dropdown"
   const levels = [`high`, `medium`, `low`];
   
   for (i of levels) {
     const newOption = document.createElement('option');
     newOption.value = i;
     newOption.textContent = i;
-    priorityDropdown.append(newOption);
+    dropdown.append(newOption);
   }
+  const inputBox = document.querySelector('.task-description');
+  inputBox.insertAdjacentElement("afterend", dropdown);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  const priorityDropdown = document.createElement('select');
-
-  createPriorityDropdown(priorityDropdown);
   
-  
-  // stick in priority dropdown
-  const inputBox = document.querySelector('#new-task-description');
-  inputBox.insertAdjacentElement("afterend", priorityDropdown)
+  createPriorityDropdown();
 
   // grab submit button
   const submitButton = document.querySelector('input:last-child');
@@ -41,17 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     // capture task text that was input
-    let newTask = document.querySelector('#new-task-description').value;
-    let newUser = document.querySelector('#new-task-user').value;
+    let task = document.querySelector('.task-description').value;
+    let taskUser = document.querySelector('#new-task-user').value;
 
     const taskList = document.querySelector('#tasks');
     const taskItem = document.createElement('li');
 
     // select class for task
-    assignPriority(priorityDropdown, taskItem);
+    assignPriority(document.querySelector('.priority-dropdown'), taskItem);
 
     // add new task to list
-    taskItem.textContent = 'Task: ' + newTask + ', User: ' + newUser;
+    taskItem.textContent = 'Task: ' + task + ', User: ' + taskUser;
     taskList.append(taskItem);
 
     // add edit button for that new task
@@ -77,17 +75,17 @@ document.addEventListener("DOMContentLoaded", () => {
       `
 
       const taskBox = document.querySelector('#edit-task-description');
-      taskBox.value = newTask;
+      taskBox.value = task;
       const userBox = document.querySelector('#edit-task-user');
-      userBox.value = newUser;
+      userBox.value = taskUser;
 
       const saveButton = document.querySelector('#save-task');
       saveButton.addEventListener('click', function(e){
-        newTask = taskBox.value;
-        newUser = userBox.value;
+        task = taskBox.value;
+        taskUser = userBox.value;
         assignPriority(document.querySelector('#edit-priority'), taskItem);
 
-        taskItem.textContent = 'Task: ' + newTask + ', User: ' + newUser;
+        taskItem.textContent = 'Task: ' + task + ', User: ' + taskUser;
       // add edit button for that new task
    
         taskItem.append(editButton);
