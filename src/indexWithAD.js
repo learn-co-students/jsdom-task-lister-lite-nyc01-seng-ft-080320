@@ -23,23 +23,18 @@ document.addEventListener("DOMContentLoaded", e => {
             // create new li element to store our tasks
            const taskLi = document.createElement('li')
 
-           // can create if statement to give an error if task is not given
+           // can create if statement to prevent duplicate tasks
            if(task){
 
            // now assign the value from the form to the element
            taskLi.textContent = task
-                // AD: creating delete button
-                const button = document.createElement('button')
-                button.textContent = 'delete'
-                taskLi.append(button)
-                button.addEventListener("click", function(e){
-                    taskLi.remove()
-                    // e.target.parentNode.remove()
-                })
+           const button = document.createElement('button')
+           button.textContent = delete
+           taskLi.append(button)
 
            // now append the tasks to the dom
            taskUl = document.querySelector('#tasks')
-           taskUl.appendChild(taskLi)
+           taskUl.append(taskLi)
 
            form.reset()
            } else {
